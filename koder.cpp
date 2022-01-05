@@ -114,10 +114,11 @@ int main(){
 	int saved_places = 0;
 	
 //	FILE *f = fopen("testFile.txt","r");
-	FILE *f = fopen("Harry Potter books/TXT/HP_ALL.txt","r");
-//	FILE *f = fopen("bible.txt","r");
+//	FILE *f = fopen("Harry Potter books/TXT/HP1HRV.txt","r");
+	FILE *f = fopen("bible.txt","r");
 //	FILE *f = fopen("TFIOS.txt","r");
 //	FILE *f = fopen("gatsby.txt","r");
+//	FILE *f = fopen("wiki_hrv.txt","r");
 
 	tekst2[2]='\0';
 	tekst3[3]='\0';
