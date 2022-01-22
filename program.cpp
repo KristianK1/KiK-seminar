@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#include<iostream>
 #include<string.h>
 
 #define brZnakova 90
@@ -19,6 +18,7 @@ void swap(struct znakStat *one, struct znakStat *two){
 	*one=*two;
 	*two=temp;
 }
+
 void sortSigns(struct znakStat *polje, int size){
 	for(int i=0;i<size-1; i++){
 		if(i%1000 == 0) printf("%.2f\n", 100.0*i/size);
@@ -55,7 +55,6 @@ void quickSort(struct znakStat *a, int low, int high) {
 char znakovi[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,:;%&?!()[]/*-+='{}“”—_’… \n";
 	
 int pronadi(char x){
-	
 	for(int i=0;i<brZnakova;i++){
 		if(znakovi[i]==x) return i;
 	}
@@ -127,19 +126,19 @@ int main(){
 		//else printf("%c %d\n", c3, c3);
 	}
 	
-	
-	/*for(int i=0;i<brZnakova; i++){
+	printf("\n\n\n\n");
+	for(int i=0;i<brZnakova; i++){
 		printf("%c %d\n", znakovi[i], statistika[i]);
-	}*/
+	}
 	
-	/*for(int i=0;i<brZnakova;i++){
+	for(int i=0;i<brZnakova;i++){
 		for(int j=0;j<brZnakova;j++){
 			if(statistika2[brZnakova*i+j]>100)
 				printf("%c%c %d\n", znakovi[i], znakovi[j], statistika2[brZnakova*i+j]);
 		}
-	}*/
+	}
 	
-	/*struct znakStat statsCombined1[brZnakova2] = {0};
+	struct znakStat statsCombined1[brZnakova2] = {0};
 	for(int i = 0;i<brZnakova; i++){
 		for(int j = 0;j<brZnakova; j++){
 		
@@ -163,28 +162,26 @@ int main(){
 		if(statsCombined1[i].Fi>1)
 			printf("%d\n",statsCombined1[i].Fi);
 	}
-	*/
 	
-	struct znakStat *statsCombined1;
-	statsCombined1 = (struct znakStat*) calloc(brZnakova3, sizeof(struct znakStat));
-	if(statsCombined1==NULL){
-		printf("jebemti mrtvog isusa");
-		return 9;
-	}
-	for(int i = 0;i<brZnakova; i++){
-		for(int j = 0;j<brZnakova; j++){
-			for(int k = 0;k<brZnakova; k++){
-			
-		
-			statsCombined1[i*brZnakova2+j*brZnakova+k].Fi = statistika3[i*brZnakova2+j*brZnakova+k];
-			statsCombined1[i*brZnakova2+j*brZnakova+k].str[0] = znakovi[i];
-			statsCombined1[i*brZnakova2+j*brZnakova+k].str[1] = znakovi[j];
-			statsCombined1[i*brZnakova2+j*brZnakova+k].str[2] = znakovi[k];
-			statsCombined1[i*brZnakova2+j*brZnakova+k].str[3] = '\0';
-			}
-		}
-	}
 	
+//	struct znakStat *statsCombined1;
+//	statsCombined1 = (struct znakStat*) calloc(brZnakova3, sizeof(struct znakStat));
+//	if(statsCombined1==NULL){
+//		return 9;
+//	}
+//	for(int i = 0;i<brZnakova; i++){
+//		for(int j = 0;j<brZnakova; j++){
+//			for(int k = 0;k<brZnakova; k++){
+//			
+//		
+//			statsCombined1[i*brZnakova2+j*brZnakova+k].Fi = statistika3[i*brZnakova2+j*brZnakova+k];
+//			statsCombined1[i*brZnakova2+j*brZnakova+k].str[0] = znakovi[i];
+//			statsCombined1[i*brZnakova2+j*brZnakova+k].str[1] = znakovi[j];
+//			statsCombined1[i*brZnakova2+j*brZnakova+k].str[2] = znakovi[k];
+//			statsCombined1[i*brZnakova2+j*brZnakova+k].str[3] = '\0';
+//			}
+//		}
+//	}
 	
 	
 	
@@ -192,7 +189,8 @@ int main(){
 	
 	
 	
-	quickSort(statsCombined1, 0, brZnakova3);
+	
+	/*quickSort(statsCombined1, 0, brZnakova3);
 	
 	printf("HELLO \n");
 	
@@ -202,7 +200,7 @@ int main(){
 	}
 	for(int i=brZnakova3;i>(brZnakova3-40); i--){
 			printf("%d\n", statsCombined1[i].Fi);
-	}
+	}*/
 	
 	
 	return 0;

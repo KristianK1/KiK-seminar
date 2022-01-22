@@ -8,9 +8,9 @@
 #define brZnakova2 8100
 #define brZnakova3 729000
 
-#define Ncombs 37
+#define Ncombs 36
 
-char* Popis[37] = {
+char* Popis[36] = {
 	"and",
 	" to",
 	" an",
@@ -36,7 +36,6 @@ char* Popis[37] = {
 	", ",
 	". ",
 	" w",
-	" w",
 	"ed",
 	"an",
 	"re",
@@ -50,13 +49,53 @@ char* Popis[37] = {
 	" o"
 };
 
+
+//char* Popis[36] = {
+//"e ",
+//"a ",
+//"i ",
+//"o ",
+//"je",
+//" s",
+//"je ",
+//" n",
+//"u ",
+//" je ",
+//" p",
+//" je",
+//"na",
+//", ",
+//" j",
+//" i",
+//" d",
+//" o",
+//" se ",
+//"li",
+//"da",
+//". ",
+//" na",
+//" se",
+//"ko",
+//"ti",
+//"ra",
+//"da ",
+//"ni",
+//" pr",
+//"ne",
+//" u",
+//" da ",
+//"se ",
+//" k",
+//" po",
+//
+//};
+
 char tekst2[3];
 char tekst3[4];
 char tekst4[5];
 char tekst5[6];
 	
-//char tekst[] = "In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since.";
-
+	
 int find(){
 	for(int i = 0; i<Ncombs; i++){
 		if(strcmp(Popis[i], tekst5)==0){
@@ -113,11 +152,12 @@ char next(FILE *f){
 int main(){
 	int saved_places = 0;
 	
+//	FILE *f = fopen("cetvrti_svjetski_rat_HRV.txt","r");
 //	FILE *f = fopen("testFile.txt","r");
-//	FILE *f = fopen("Harry Potter books/TXT/HP1HRV.txt","r");
-	FILE *f = fopen("bible.txt","r");
+//	FILE *f = fopen("Harry Potter books/TXT/HP_ALL.txt","r");
+//	FILE *f = fopen("bible.txt","r");
 //	FILE *f = fopen("TFIOS.txt","r");
-//	FILE *f = fopen("gatsby.txt","r");
+	FILE *f = fopen("gatsby.txt","r");
 //	FILE *f = fopen("wiki_hrv.txt","r");
 
 	tekst2[2]='\0';
@@ -151,8 +191,12 @@ int main(){
 	c = fgetc(f);
 	tekst5[4] = c;
 	
+	
 	int saved = find();
+	
 	saved_places+=saved;
+	
+	
 	for(int i=0;i<saved;i++) next(f);
 	
 	
@@ -176,24 +220,3 @@ int main(){
 	printf("saved: %d, total: %d. %.2f\n", saved_places, n, 100.0*saved_places/n);
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

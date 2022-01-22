@@ -8,9 +8,7 @@
 #define brZnakova2 8100
 #define brZnakova3 729000
 
-#define MAX_SIZE 50000000
-
-#define N 10
+#define N 5
 
 typedef struct znakStat {
 	unsigned int Fi;
@@ -101,7 +99,7 @@ int increment(ZnakStat *p, long* current_size, long *max_size, char comb[N]){ //
 
 void printResults(ZnakStat *p, long current_size, int total){
 	printf("\n\n\n");
-	for(int i=0;i<30;i++){
+	for(int i=0;i<9;i++){
 		//printf("|");
 		printf("\"");
 		for(int k = 0;k<N;k++){
@@ -118,7 +116,7 @@ void printResults(ZnakStat *p, long current_size, int total){
 		//printf("|\t%6d\n", p[i].Fi);
 	}
 	
-	for(int i=0;i<30;i++){
+	for(int i=0;i<9;i++){
 		printf("%.0f\n", 1000000.0*p[i].Fi/total);
 	}
 }
@@ -133,10 +131,8 @@ void printResults(ZnakStat *p, long current_size, int total){
 
 int main(){
 //	FILE *f = fopen("testFile.txt","r");
-	FILE *f = fopen("Harry Potter books/TXT/million.txt","r");
-//	FILE *f = fopen("Harry Potter books/TXT/HP1HRV.txt","r");
-//	FILE *f = fopen("cetvrti_svjetski_rat_HRV.txt","r");
-//	FILE *f = fopen("mik.txt","r");
+	FILE *f = fopen("Harry Potter books/TXT/HP_ALL.txt","r");
+//	FILE *f = fopen("Harry Potter books/TXT/HP4.txt","r");
 
 //	FILE *f = fopen("bible.txt","r");
 //	FILE *f = fopen("TFIOS.txt","r");
@@ -150,7 +146,7 @@ int main(){
 	long *current_size = (long*)calloc(1, sizeof(long));
 	long *max_size = (long*)calloc(1, sizeof(long)); //inkrementi 10000
 	
-	*max_size=MAX_SIZE;
+	*max_size=300000;
 	ZnakStat *Stats = (ZnakStat*) calloc(*max_size, sizeof(ZnakStat));
 	printf("MAX SIZE: %ld\n", *max_size);
 	if(Stats == NULL) return 0;
