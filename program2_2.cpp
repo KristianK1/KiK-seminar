@@ -8,7 +8,7 @@
 #define brZnakova2 8100
 #define brZnakova3 729000
 
-#define N 5
+#define N 20
 
 typedef struct znakStat {
 	unsigned int Fi;
@@ -66,21 +66,20 @@ int pronadi(char x){
 	return -1;
 }*/
 
-void expandSize(ZnakStat *p, long size){
-	printf("poceo");
+ZnakStat* expandSize(ZnakStat *p, long size){
 	p = (ZnakStat*)realloc(p, size*sizeof(ZnakStat));
 	if(p==NULL) {
 		printf("allocation error");
 		exit(EXIT_FAILURE);	
 	}
-	printf("zavrsio");
+	return p;
 }
 
-int increment(ZnakStat *p, long* current_size, long *max_size, char comb[N]){ //vraca 0 ako nije povecao velicinu polja, 1 ako jest
+ZnakStat* increment(ZnakStat *p, long* current_size, long *max_size, char comb[N]){ //vraca 0 ako nije povecao velicinu polja, 1 ako jest
 	for(int i=0;i<*current_size;i++){
 		if(strcmp(p[i].str,comb)==0){
 			p[i].Fi++;
-			return 0;
+			return p;
 		}
 	}
 	
@@ -89,17 +88,17 @@ int increment(ZnakStat *p, long* current_size, long *max_size, char comb[N]){ //
 	
 	(*current_size)++;
 	if(*current_size >= *max_size){
-		*max_size = *max_size + 5000;
-		printf("\n%d %d||\n", *current_size, *max_size);
-		printf("previse");
-		expandSize(p, *max_size);
+		*max_size = *max_size + 50000;
+		printf("\n Realokacija na %d||\n", *max_size);
+		
+		p = expandSize(p, *max_size);
 	}
-	return 1;
+	return p;
 }
 
 void printResults(ZnakStat *p, long current_size, int total){
 	printf("\n\n\n");
-	for(int i=0;i<9;i++){
+	for(int i=0;i<200;i++){
 		//printf("|");
 		printf("\"");
 		for(int k = 0;k<N;k++){
@@ -116,9 +115,9 @@ void printResults(ZnakStat *p, long current_size, int total){
 		//printf("|\t%6d\n", p[i].Fi);
 	}
 	
-	for(int i=0;i<9;i++){
+	/*for(int i=0;i<9;i++){
 		printf("%.0f\n", 1000000.0*p[i].Fi/total);
-	}
+	}*/
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,8 +130,8 @@ void printResults(ZnakStat *p, long current_size, int total){
 
 int main(){
 //	FILE *f = fopen("testFile.txt","r");
-	FILE *f = fopen("Harry Potter books/TXT/HP_ALL.txt","r");
-//	FILE *f = fopen("Harry Potter books/TXT/HP4.txt","r");
+//	FILE *f = fopen("Harry Potter books/TXT/HP_ALL.txt","r");
+	FILE *f = fopen("Harry Potter books/TXT/HP1.txt","r");
 
 //	FILE *f = fopen("bible.txt","r");
 //	FILE *f = fopen("TFIOS.txt","r");
@@ -146,7 +145,7 @@ int main(){
 	long *current_size = (long*)calloc(1, sizeof(long));
 	long *max_size = (long*)calloc(1, sizeof(long)); //inkrementi 10000
 	
-	*max_size=300000;
+	*max_size=100000;
 	ZnakStat *Stats = (ZnakStat*) calloc(*max_size, sizeof(ZnakStat));
 	printf("MAX SIZE: %ld\n", *max_size);
 	if(Stats == NULL) return 0;
@@ -158,17 +157,17 @@ int main(){
 		if(temp == EOF) return -1;
 	}
 	comb[N] = '\0';
-	increment(Stats, current_size, max_size, comb);
+	Stats = increment(Stats, current_size, max_size, comb);
 	int x=0;
 	
 	
 	
 	
-	
+	printf("\n\n");
 	while(true){
 		x++;
 		if(x%100000==0){
-			printf("%d %d %d\n",x,*current_size, *max_size);
+			printf("Obraðeno: %d, Popunjeno: %d\n",x, *current_size);
 		}
 		
 		
@@ -179,6 +178,8 @@ int main(){
 			comb[i-1] = comb[i];
 		}
 		temp = fgetc(f);
+		//printf("%c", temp);
+		//if(x>5000) while(1);
 		if(temp==EOF) {
 			printf("Kraj fajla\n");
 			break;
@@ -186,7 +187,7 @@ int main(){
 		comb[N-1] = temp;
 		comb[N] = '\0';
 		//printf("|%s|\n", comb);
-		increment(Stats, current_size, max_size, comb);
+		Stats = increment(Stats, current_size, max_size, comb);
 	}
 	quickSort(Stats, 0, *current_size);
 	
